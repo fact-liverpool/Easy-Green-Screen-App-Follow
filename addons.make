@@ -1,0 +1,5 @@
+ofxChromaKeyShader
+ofxCv
+ofxGui
+ofxOpenCv
+ofxSyphon
