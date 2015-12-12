@@ -7,12 +7,15 @@ void ofApp::setup(){
     bShowGui = true;
     bUpdateBgColor = true;
     
-    camW = 640 ; camH = 480;
-    ofSetWindowShape(camW*2, camH*1.5f);
+    camera.setup();
+
+    
+    camW = 1056 ; camH = 704;
+    ofSetWindowShape(camW, camH);
     
     chromakey = new ofxChromaKeyShader(camW, camH);
     
-    // webcam setup
+    //camera.setup();
     webcam.setDesiredFrameRate(60);
     webcam.initGrabber(camW, camH);
     
@@ -24,12 +27,16 @@ void ofApp::setup(){
 
     // GUI
     chromaGui.setDefaultHeight(18);
-    chromaGui.setDefaultWidth(camW/2);
+    chromaGui.setDefaultWidth(camW/5);
     chromaGui.setup(chromakey->paramGp, "chromaSettings.xml");
     chromaGui.loadFromFile("chromaSettings.xml");
     chromaGui.setPosition(0, 0);
     
-    textureSyphonServer.setName("Texture Output");
+    textureRawSyphonServer.setName("EasyGreenScreen - Raw Output");
+    textureFinalSyphonServer.setName("EasyGreenScreen - Final Output");
+
+    
+    
 
     
 }
@@ -41,15 +48,30 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    camera.update();
     
+    ///cout << camera.getWidth() << " " << camera.getHeight() << endl;
+  
     if(!isImage){
         bgMovie.update();
     }
+    
         
+//    //webcam.update();
+//    if(camera.isFrameNew()) {
+//        if(bUpdateBgColor)
+//            chromakey->updateBgColor(camera.getLivePixels());
+//        if(!isImage){
+//            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgMovie.getTexture());
+//        }else{
+//            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgImage.getTexture());
+//        }
+//    }
+    
     webcam.update();
     if(webcam.isFrameNew()) {
-      //  if(bUpdateBgColor)
-          //  chromakey->updateBgColor(webcam.getPixels());
+        if(bUpdateBgColor)
+            chromakey->updateBgColor(webcam.getPixels());
         if(!isImage){
             chromakey->updateChromakeyMask(webcam.getTexture(), bgMovie.getTexture());
         }else{
@@ -65,53 +87,30 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(255);
     ofBackground(0);
-    
     // draw Cam mask
-    chromakey->drawFinalImage(camW/2, 0, camW, camH);
-    drawDebugMasks();
+    chromakey->drawFinalImage(0, 0,ofGetWindowWidth(), camH*(float)ofGetWindowWidth()/camW );
     
     // GUI
     if(bShowGui) {
         chromaGui.draw();
-        
+    }
         // draw bg color's reference Rect
-        if(bUpdateBgColor) {
+    if(bUpdateBgColor) {
             ofPushStyle();
             ofNoFill();
             ofSetLineWidth(3);
             ofSetColor(255);
             ofVec2f bgColorPos = chromakey->bgColorPos.get();
-            ofDrawRectangle(bgColorPos.x + camW/2, bgColorPos.y, chromakey->bgColorSize.get(), chromakey->bgColorSize.get());
-            ofDrawBitmapString("bgColor", bgColorPos.x + camW/2, bgColorPos.y - 5);
+            ofDrawRectangle(bgColorPos.x, bgColorPos.y, chromakey->bgColorSize.get(), chromakey->bgColorSize.get());
+            ofDrawBitmapString("bgColor", bgColorPos.x, bgColorPos.y - 5);
             ofPopStyle();
-        }
+    
     }
     
-    textureSyphonServer.publishTexture(&chromakey->fbo_final.getTexture());
+    textureRawSyphonServer.publishTexture(&camera.getLiveTexture());
+    textureFinalSyphonServer.publishTexture(&chromakey->fbo_final.getTexture());
 
     
-}
-
-//--------------------------------------------------------------
-void ofApp::drawDebugMasks() {
-    ofSetColor(255);
-    int previewW = camW/2, previewH = camH/2, labelOffset = 10;
-    
-    chromakey->drawBaseMask(camW + previewW, 0, previewW, previewH);
-    ofDrawBitmapStringHighlight("Base mask", camW + previewW, labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    chromakey->drawDetailMask(camW + previewW, previewH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Detailed mask", camW + previewW, previewH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    chromakey->drawChromaMask(previewW, camH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Chroma mask", previewW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-				
-    drawCheckerboard(camW, camH, previewW, previewH, 5);
-    chromakey->drawFinalMask(camW, camH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Final mask", camW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    webcam.draw(camW + previewW, camH, previewW, previewH);
-    ofDrawBitmapStringHighlight("RGB image", camW + previewW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
 }
 
 //--------------------------------------------------------------

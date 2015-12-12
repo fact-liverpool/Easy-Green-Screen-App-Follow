@@ -4,6 +4,8 @@
 #include "ofxSyphon.h"
 #include "ofxChromaKeyShader.h"
 #include "ofxGui.h"
+#include "ofxEdsdk.h"
+
 
 class ofApp : public ofBaseApp{
     
@@ -13,7 +15,6 @@ public:
     void draw();
     void exit();
     
-    void drawDebugMasks();
     void drawCheckerboard(float x, float y, int width, int height, int size);
     
     void keyPressed(int key);
@@ -44,6 +45,10 @@ public:
     bool bShowGui;
     bool bUpdateBgColor;
     
-    ofxSyphonServer textureSyphonServer;
+    ofxSyphonServer textureFinalSyphonServer;
+    ofxSyphonServer textureRawSyphonServer;
+
+    ofxEdsdk::Camera camera;
+
     
 };
