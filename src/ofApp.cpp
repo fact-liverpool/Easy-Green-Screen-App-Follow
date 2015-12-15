@@ -7,19 +7,26 @@ void ofApp::setup(){
     bShowGui = true;
     bUpdateBgColor = true;
     
-    camera.setup();
 
     
-    camW = 1056 ; camH = 704;
+    camW = 1280; camH = 720;
     ofSetWindowShape(camW, camH);
     
     chromakey = new ofxChromaKeyShader(camW, camH);
     
-    //camera.setup();
-    webcam.setDesiredFrameRate(60);
-    webcam.initGrabber(camW, camH);
+//    //camera.setup();
+//    webcam.setDesiredFrameRate(60);
+//    webcam.initGrabber(camW, camH);
+//    
+//    
+//    //canon EDSDK
+//    camera.setup();
+
+    //balckmagic
     
-  
+    cam.setup(1920, 1080, 50);
+
+    
     // maskee
     bgImage.load("bg.jpg");
     isImage = true; //start with an Image
@@ -48,7 +55,6 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    camera.update();
     
     ///cout << camera.getWidth() << " " << camera.getHeight() << endl;
   
@@ -57,7 +63,7 @@ void ofApp::update(){
     }
     
         
-//    //webcam.update();
+//    //camera.update();
 //    if(camera.isFrameNew()) {
 //        if(bUpdateBgColor)
 //            chromakey->updateBgColor(camera.getLivePixels());
@@ -68,16 +74,29 @@ void ofApp::update(){
 //        }
 //    }
     
-    webcam.update();
-    if(webcam.isFrameNew()) {
+//    webcam.update();
+//    if(webcam.isFrameNew()) {
+//        if(bUpdateBgColor)
+//            chromakey->updateBgColor(webcam.getPixels());
+//        if(!isImage){
+//            chromakey->updateChromakeyMask(webcam.getTexture(), bgMovie.getTexture());
+//        }else{
+//            chromakey->updateChromakeyMask(webcam.getTexture(), bgImage.getTexture());
+//        }
+//    }
+    
+    
+    //balckmagic
+    if(cam.update()) {
         if(bUpdateBgColor)
-            chromakey->updateBgColor(webcam.getPixels());
+            chromakey->updateBgColor(cam.getColorPixels());
         if(!isImage){
-            chromakey->updateChromakeyMask(webcam.getTexture(), bgMovie.getTexture());
+            chromakey->updateChromakeyMask(cam.getColorTexture(), bgMovie.getTexture(), camW, camH);
         }else{
-            chromakey->updateChromakeyMask(webcam.getTexture(), bgImage.getTexture());
+            chromakey->updateChromakeyMask(cam.getColorTexture(), bgImage.getTexture(), camW, camH);
         }
     }
+
     
 
     
@@ -107,7 +126,7 @@ void ofApp::draw(){
     
     }
     
-    textureRawSyphonServer.publishTexture(&camera.getLiveTexture());
+    textureRawSyphonServer.publishTexture(&cam.getColorTexture());
     textureFinalSyphonServer.publishTexture(&chromakey->fbo_final.getTexture());
 
     

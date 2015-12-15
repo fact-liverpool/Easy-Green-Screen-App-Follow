@@ -20,6 +20,11 @@
 		51836E151C1B20CC0058F4DD /* EDSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51C2EC4B1C1B1E2500EC5B95 /* EDSDK.framework */; };
 		51836E161C1B20CC0058F4DD /* EDSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 51C2EC4B1C1B1E2500EC5B95 /* EDSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		51AF6A203EB491668A3332FA /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 523A0C2030A2000C3355B6AE /* ofxBaseGui.cpp */; };
+		51B72BB01C20A93D00F120BC /* DeckLinkAPIDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B72BA21C20A93D00F120BC /* DeckLinkAPIDispatch.cpp */; };
+		51B72BB31C20A93D00F120BC /* ColorConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B72BA61C20A93D00F120BC /* ColorConversion.cpp */; };
+		51B72BB41C20A93D00F120BC /* DeckLinkController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B72BA81C20A93D00F120BC /* DeckLinkController.cpp */; };
+		51B72BB51C20A93D00F120BC /* ofxBlackMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B72BAA1C20A93D00F120BC /* ofxBlackMagic.cpp */; };
+		51B72BB61C20A93D00F120BC /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B72BAD1C20A93D00F120BC /* VideoFrame.cpp */; };
 		51C2EC611C1B1E2500EC5B95 /* EdsExamples.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51C2EC511C1B1E2500EC5B95 /* EdsExamples.cpp */; };
 		51C2EC621C1B1E2500EC5B95 /* EdsException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51C2EC531C1B1E2500EC5B95 /* EdsException.cpp */; };
 		51C2EC631C1B1E2500EC5B95 /* EdsStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51C2EC551C1B1E2500EC5B95 /* EdsStrings.cpp */; };
@@ -175,6 +180,24 @@
 		4F47ADEA1B35BD8DA6DD0ED9 /* ETF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ETF.h; path = ../../../Development/openFrameworks/addons/ofxCv/libs/CLD/include/CLD/ETF.h; sourceTree = SOURCE_ROOT; };
 		4F853A081FC6157739C2F13C /* ofxLabel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxLabel.cpp; path = ../../../Development/openFrameworks/addons/ofxGui/src/ofxLabel.cpp; sourceTree = SOURCE_ROOT; };
 		4F9513AE7AAE31FC003390D3 /* miniflann.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = miniflann.hpp; path = ../../../Development/openFrameworks/addons/ofxOpenCv/libs/opencv/include/opencv2/flann/miniflann.hpp; sourceTree = SOURCE_ROOT; };
+		51B72B991C20A93D00F120BC /* DeckLinkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI.h; sourceTree = "<group>"; };
+		51B72B9A1C20A93D00F120BC /* DeckLinkAPIConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIConfiguration.h; sourceTree = "<group>"; };
+		51B72B9B1C20A93D00F120BC /* DeckLinkAPIDeckControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIDeckControl.h; sourceTree = "<group>"; };
+		51B72B9C1C20A93D00F120BC /* DeckLinkAPIDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIDiscovery.h; sourceTree = "<group>"; };
+		51B72B9D1C20A93D00F120BC /* DeckLinkAPIModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIModes.h; sourceTree = "<group>"; };
+		51B72B9E1C20A93D00F120BC /* DeckLinkAPIStreaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIStreaming.h; sourceTree = "<group>"; };
+		51B72B9F1C20A93D00F120BC /* DeckLinkAPITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPITypes.h; sourceTree = "<group>"; };
+		51B72BA01C20A93D00F120BC /* DeckLinkAPIVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIVersion.h; sourceTree = "<group>"; };
+		51B72BA21C20A93D00F120BC /* DeckLinkAPIDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeckLinkAPIDispatch.cpp; sourceTree = "<group>"; };
+		51B72BA61C20A93D00F120BC /* ColorConversion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorConversion.cpp; sourceTree = "<group>"; };
+		51B72BA71C20A93D00F120BC /* ColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorConversion.h; sourceTree = "<group>"; };
+		51B72BA81C20A93D00F120BC /* DeckLinkController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeckLinkController.cpp; sourceTree = "<group>"; };
+		51B72BA91C20A93D00F120BC /* DeckLinkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkController.h; sourceTree = "<group>"; };
+		51B72BAA1C20A93D00F120BC /* ofxBlackMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBlackMagic.cpp; sourceTree = "<group>"; };
+		51B72BAB1C20A93D00F120BC /* ofxBlackMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBlackMagic.h; sourceTree = "<group>"; };
+		51B72BAC1C20A93D00F120BC /* TripleBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripleBuffer.h; sourceTree = "<group>"; };
+		51B72BAD1C20A93D00F120BC /* VideoFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoFrame.cpp; sourceTree = "<group>"; };
+		51B72BAE1C20A93D00F120BC /* VideoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFrame.h; sourceTree = "<group>"; };
 		51C2EC421C1B1E2500EC5B95 /* EDSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDSDK.h; sourceTree = "<group>"; };
 		51C2EC431C1B1E2500EC5B95 /* EDSDKErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDSDKErrors.h; sourceTree = "<group>"; };
 		51C2EC441C1B1E2500EC5B95 /* EDSDKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDSDKTypes.h; sourceTree = "<group>"; };
@@ -620,6 +643,72 @@
 			name = src;
 			sourceTree = "<group>";
 		};
+		51B72B8A1C20A93D00F120BC /* ofxBlackmagic */ = {
+			isa = PBXGroup;
+			children = (
+				51B72B961C20A93D00F120BC /* libs */,
+				51B72BA51C20A93D00F120BC /* src */,
+			);
+			name = ofxBlackmagic;
+			path = ../../../Development/openFrameworks/addons/ofxBlackmagic;
+			sourceTree = "<group>";
+		};
+		51B72B961C20A93D00F120BC /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				51B72B971C20A93D00F120BC /* DeckLink */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		51B72B971C20A93D00F120BC /* DeckLink */ = {
+			isa = PBXGroup;
+			children = (
+				51B72B981C20A93D00F120BC /* include */,
+				51B72BA11C20A93D00F120BC /* src */,
+			);
+			path = DeckLink;
+			sourceTree = "<group>";
+		};
+		51B72B981C20A93D00F120BC /* include */ = {
+			isa = PBXGroup;
+			children = (
+				51B72B991C20A93D00F120BC /* DeckLinkAPI.h */,
+				51B72B9A1C20A93D00F120BC /* DeckLinkAPIConfiguration.h */,
+				51B72B9B1C20A93D00F120BC /* DeckLinkAPIDeckControl.h */,
+				51B72B9C1C20A93D00F120BC /* DeckLinkAPIDiscovery.h */,
+				51B72B9D1C20A93D00F120BC /* DeckLinkAPIModes.h */,
+				51B72B9E1C20A93D00F120BC /* DeckLinkAPIStreaming.h */,
+				51B72B9F1C20A93D00F120BC /* DeckLinkAPITypes.h */,
+				51B72BA01C20A93D00F120BC /* DeckLinkAPIVersion.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		51B72BA11C20A93D00F120BC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				51B72BA21C20A93D00F120BC /* DeckLinkAPIDispatch.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		51B72BA51C20A93D00F120BC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				51B72BA61C20A93D00F120BC /* ColorConversion.cpp */,
+				51B72BA71C20A93D00F120BC /* ColorConversion.h */,
+				51B72BA81C20A93D00F120BC /* DeckLinkController.cpp */,
+				51B72BA91C20A93D00F120BC /* DeckLinkController.h */,
+				51B72BAA1C20A93D00F120BC /* ofxBlackMagic.cpp */,
+				51B72BAB1C20A93D00F120BC /* ofxBlackMagic.h */,
+				51B72BAC1C20A93D00F120BC /* TripleBuffer.h */,
+				51B72BAD1C20A93D00F120BC /* VideoFrame.cpp */,
+				51B72BAE1C20A93D00F120BC /* VideoFrame.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		51C2EC341C1B1E2500EC5B95 /* ofxEdsdk */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,6 +1043,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				51B72B8A1C20A93D00F120BC /* ofxBlackmagic */,
 				51C2EC341C1B1E2500EC5B95 /* ofxEdsdk */,
 				B64E989C1230CA6B4CC47895 /* ofxChromaKeyShader */,
 				6025FAF6414C2CA589764D26 /* ofxCv */,
@@ -1241,14 +1331,19 @@
 				51C2EC631C1B1E2500EC5B95 /* EdsStrings.cpp in Sources */,
 				5A908436A45AEE2C6FED78BB /* ETF.cpp in Sources */,
 				875D524B44DACCDF9B6DBF77 /* fdog.cpp in Sources */,
+				51B72BB01C20A93D00F120BC /* DeckLinkAPIDispatch.cpp in Sources */,
 				63323941D693A7979AB593F9 /* Calibration.cpp in Sources */,
 				AC5704602F7695A711C9D255 /* ContourFinder.cpp in Sources */,
 				2A0CC61E4F95D911E00CD217 /* Distance.cpp in Sources */,
+				51B72BB51C20A93D00F120BC /* ofxBlackMagic.cpp in Sources */,
 				4BA4D78E7F479C940EC1AC0B /* Flow.cpp in Sources */,
+				51B72BB31C20A93D00F120BC /* ColorConversion.cpp in Sources */,
 				5E8CE38FDEEA34DB8BB28010 /* Helpers.cpp in Sources */,
 				51C2EC621C1B1E2500EC5B95 /* EdsException.cpp in Sources */,
 				B9C88E7C9E95840250BCBA4E /* Kalman.cpp in Sources */,
+				51B72BB61C20A93D00F120BC /* VideoFrame.cpp in Sources */,
 				B2F937660CF4356490E80D5E /* ObjectFinder.cpp in Sources */,
+				51B72BB41C20A93D00F120BC /* DeckLinkController.cpp in Sources */,
 				CA46A9739B2C3826C3D494CF /* RunningBackground.cpp in Sources */,
 				4C1763C009A94C630BE01FFA /* Tracker.cpp in Sources */,
 				1FCDB7449BBD992B1C8DFB86 /* Utilities.cpp in Sources */,

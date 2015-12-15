@@ -5,7 +5,7 @@
 #include "ofxChromaKeyShader.h"
 #include "ofxGui.h"
 #include "ofxEdsdk.h"
-
+#include "ofxBlackMagic.h"
 
 class ofApp : public ofBaseApp{
     
@@ -50,5 +50,6 @@ public:
 
     ofxEdsdk::Camera camera;
 
-    
+    ofxBlackMagic cam;
+
 };
