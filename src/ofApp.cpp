@@ -9,23 +9,24 @@ void ofApp::setup(){
     
 
     
-    camW = 1280; camH = 720;
+    camW = 1920; camH = 1080;
     ofSetWindowShape(camW, camH);
     
     chromakey = new ofxChromaKeyShader(camW, camH);
-    
-//    //camera.setup();
-//    webcam.setDesiredFrameRate(60);
-//    webcam.initGrabber(camW, camH);
-//    
-//    
-//    //canon EDSDK
-//    camera.setup();
 
+#ifdef WEBCAM
+    //webcam
+    camera.setDesiredFrameRate(60);
+    camera.initGrabber(camW, camH);
+#endif
+    //canon EDSDK
+#ifdef CANONEDSDK
+    camera.setup();
+#endif
     //balckmagic
-    
-    cam.setup(1920, 1080, 50);
-
+#ifdef BLACKMAGIC
+    camera.setup(1920, 1080, 30);
+#endif
     
     // maskee
     bgImage.load("bg.jpg");
@@ -56,46 +57,47 @@ void ofApp::exit() {
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    ///cout << camera.getWidth() << " " << camera.getHeight() << endl;
   
     if(!isImage){
         bgMovie.update();
     }
     
-        
-//    //camera.update();
-//    if(camera.isFrameNew()) {
-//        if(bUpdateBgColor)
-//            chromakey->updateBgColor(camera.getLivePixels());
-//        if(!isImage){
-//            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgMovie.getTexture());
-//        }else{
-//            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgImage.getTexture());
-//        }
-//    }
-    
-//    webcam.update();
-//    if(webcam.isFrameNew()) {
-//        if(bUpdateBgColor)
-//            chromakey->updateBgColor(webcam.getPixels());
-//        if(!isImage){
-//            chromakey->updateChromakeyMask(webcam.getTexture(), bgMovie.getTexture());
-//        }else{
-//            chromakey->updateChromakeyMask(webcam.getTexture(), bgImage.getTexture());
-//        }
-//    }
-    
-    
-    //balckmagic
-    if(cam.update()) {
+#ifdef CANONEDSDK
+    //camera.update();
+    if(camera.isFrameNew()) {
         if(bUpdateBgColor)
-            chromakey->updateBgColor(cam.getColorPixels());
+            chromakey->updateBgColor(camera.getLivePixels());
         if(!isImage){
-            chromakey->updateChromakeyMask(cam.getColorTexture(), bgMovie.getTexture(), camW, camH);
+            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgMovie.getTexture());
         }else{
-            chromakey->updateChromakeyMask(cam.getColorTexture(), bgImage.getTexture(), camW, camH);
+            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgImage.getTexture());
         }
     }
+#endif
+#ifdef WEBCAM
+    camera.update();
+    if(camera.isFrameNew()) {
+        if(bUpdateBgColor)
+            chromakey->updateBgColor(camera.getPixels());
+        if(!isImage){
+            chromakey->updateChromakeyMask(camera.getTexture(), bgMovie.getTexture());
+        }else{
+            chromakey->updateChromakeyMask(camera.getTexture(), bgImage.getTexture());
+        }
+    }
+#endif
+#ifdef BLACKMAGIC
+    //balckmagic
+    if(camera.update()) {
+        if(bUpdateBgColor)
+            chromakey->updateBgColor(camera.getColorPixels());
+        if(!isImage){
+            chromakey->updateChromakeyMask(camera.getColorTexture(), bgMovie.getTexture(), camW, camH);
+        }else{
+            chromakey->updateChromakeyMask(camera.getColorTexture(), bgImage.getTexture(), camW, camH);
+        }
+    }
+#endif
 
     
 
@@ -126,7 +128,17 @@ void ofApp::draw(){
     
     }
     
-    textureRawSyphonServer.publishTexture(&cam.getColorTexture());
+#ifdef CANONEDSDK
+    textureRawSyphonServer.publishTexture(&camera.getColorTexture());
+#endif
+    
+#ifdef WEBCAM
+    textureRawSyphonServer.publishTexture(&camera.getTexture());
+#endif
+    
+#ifdef BLACKMAGIC
+    textureRawSyphonServer.publishTexture(&camera.getColorTexture());
+#endif
     textureFinalSyphonServer.publishTexture(&chromakey->fbo_final.getTexture());
 
     

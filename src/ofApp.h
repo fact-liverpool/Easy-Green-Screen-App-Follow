@@ -1,11 +1,19 @@
 #pragma once
 
+#define BLACKMAGIC
+
 #include "ofMain.h"
 #include "ofxSyphon.h"
 #include "ofxChromaKeyShader.h"
 #include "ofxGui.h"
+
+#ifdef CANONEDSK
 #include "ofxEdsdk.h"
+#endif
+#ifdef BLACKMAGIC
 #include "ofxBlackMagic.h"
+#endif
+
 
 class ofApp : public ofBaseApp{
     
@@ -36,7 +44,6 @@ public:
     bool isMovie;
 
     ofxChromaKeyShader *chromakey;
-    ofVideoGrabber webcam;
     int camW, camH;
     
     ofFbo checkerboardTex;
@@ -47,9 +54,14 @@ public:
     
     ofxSyphonServer textureFinalSyphonServer;
     ofxSyphonServer textureRawSyphonServer;
-
+#ifdef WEBCAM
+    ofVideoGrabber camera;
+#endif
+#ifdef CANONEDSDK
     ofxEdsdk::Camera camera;
-
-    ofxBlackMagic cam;
+#endif
+#ifdef BLACKMAGIC
+    ofxBlackMagic camera;
+#endif
 
 };
