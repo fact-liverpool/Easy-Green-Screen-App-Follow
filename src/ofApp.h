@@ -1,6 +1,8 @@
 #pragma once
 
-#define BLACKMAGIC
+#define WEBCAM
+//#define BLACKMAGIC
+//#define CANONEDSK
 
 #include "ofMain.h"
 #include "ofxSyphon.h"
@@ -23,7 +25,6 @@ public:
     void draw();
     void exit();
     
-    void drawCheckerboard(float x, float y, int width, int height, int size);
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -34,6 +35,8 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+    
+    void resetParams(bool & b);
     
     // === Variables =============================
     
@@ -54,6 +57,7 @@ public:
     
     ofxSyphonServer textureFinalSyphonServer;
     ofxSyphonServer textureRawSyphonServer;
+    
 #ifdef WEBCAM
     ofVideoGrabber camera;
 #endif

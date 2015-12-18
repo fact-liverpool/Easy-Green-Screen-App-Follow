@@ -1,0 +1,52 @@
+<chromaSettings_xml>
+	<Image_position>
+		<photoOffset>0, 0</photoOffset>
+		<photoZoom>1</photoZoom>
+		<photoRotation>0</photoRotation>
+		<baseMaskClip_b_w_>0.2, 0.6</baseMaskClip_b_w_>
+		<detailMaskClip_b_w_>0.565, 0.82</detailMaskClip_b_w_>
+		<endMaskClip_b_w_>0.1, 0.6</endMaskClip_b_w_>
+		<clippingMask_TopRight_>1280, 920</clippingMask_TopRight_>
+		<clippingMask_BottomRight_>0, 0</clippingMask_BottomRight_>
+	</Image_position>
+	<GP_-_DO_NOT_CHANGE>
+		<bgColorPos>980.125, 239.867</bgColorPos>
+		<bgColorROIsize>113.531</bgColorROIsize>
+		<bgColor>0.309478, 0.385691, 0.209432, 1</bgColor>
+		<baseMaskStrength>0.6</baseMaskStrength>
+		<chromaMaskStrength>0.4</chromaMaskStrength>
+		<greenspillStrength>0.4</greenspillStrength>
+		<multiplyFilterHueOffset>0.25</multiplyFilterHueOffset>
+		<blurValue>512</blurValue>
+		<dilateStep>3</dilateStep>
+		<erodeStep>1</erodeStep>
+	<baseMaskClip_b_w_>0.2, 0.6</baseMaskClip_b_w_>
+		<detailMaskClip_b_w_>0.565, 0.82</detailMaskClip_b_w_>
+		<endMaskClip_b_w_>0.1, 0.6</endMaskClip_b_w_>
+	</GP_-_DO_NOT_CHANGE>
+<chromaSettings_xml/>
+<group>
+		<Image_position>
+			<photoOffset>0, 0</photoOffset>
+			<photoZoom>1</photoZoom>
+			<photoRotation>0</photoRotation>
+			<clippingMask_TopRight_>1280, 920</clippingMask_TopRight_>
+			<clippingMask_BottomRight_>0, 0</clippingMask_BottomRight_>
+		</Image_position>
+		<GP_-_DO_NOT_CHANGE>
+			<bgColorPos>960, 92</bgColorPos>
+			<bgColorROIsize>20</bgColorROIsize>
+			<bgColor>0.502, 0.7373, 0.5137, 1</bgColor>
+			<baseMaskClip_b_w_>0.2, 0.6</baseMaskClip_b_w_>
+			<detailMaskClip_b_w_>0.565, 0.82</detailMaskClip_b_w_>
+			<endMaskClip_b_w_>0.1, 0.6</endMaskClip_b_w_>
+			<baseMaskStrength>0.6</baseMaskStrength>
+			<chromaMaskStrength>0.4</chromaMaskStrength>
+			<greenspillStrength>0.4</greenspillStrength>
+			<multiplyFilterHueOffset>0.25</multiplyFilterHueOffset>
+			<blurValue>512</blurValue>
+			<dilateStep>3</dilateStep>
+			<erodeStep>1</erodeStep>
+		</GP_-_DO_NOT_CHANGE>
+	</group>
+</chromaSettings_xml>

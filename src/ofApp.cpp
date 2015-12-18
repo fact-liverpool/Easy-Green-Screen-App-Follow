@@ -5,17 +5,17 @@ void ofApp::setup(){
     
     
     bShowGui = true;
-    bUpdateBgColor = true;
+    bUpdateBgColor = false;
     
 
-    
-    camW = 1920; camH = 1080;
+    camW = 1280; camH = 720;
     ofSetWindowShape(camW, camH);
     
     chromakey = new ofxChromaKeyShader(camW, camH);
 
 #ifdef WEBCAM
     //webcam
+    camera.setDeviceID(0);
     camera.setDesiredFrameRate(60);
     camera.initGrabber(camW, camH);
 #endif
@@ -25,7 +25,7 @@ void ofApp::setup(){
 #endif
     //balckmagic
 #ifdef BLACKMAGIC
-    camera.setup(1920, 1080, 30);
+    camera.setup(1920, 1080, 59.94f);
 #endif
     
     // maskee
@@ -34,21 +34,35 @@ void ofApp::setup(){
     isMovie = false; //start with an Image
 
     // GUI
-    chromaGui.setDefaultHeight(18);
+    chromaGui.setup();
+    ofParameter<bool> reset = false;
+    reset.addListener(this, &ofApp::resetParams);
+    chromaGui.add(reset.set("RESET", false));
+    
+    chromaGui.add(chromakey->positionParams);
+    chromaGui.add(chromakey->generalParams);
+    chromaGui.setDefaultHeight(15);
     chromaGui.setDefaultWidth(camW/5);
-    chromaGui.setup(chromakey->paramGp, "chromaSettings.xml");
-    chromaGui.loadFromFile("chromaSettings.xml");
     chromaGui.setPosition(0, 0);
+    
+    chromaGui.loadFromFile("settings.xml");
+    chromaGui.minimizeAll();
     
     textureRawSyphonServer.setName("EasyGreenScreen - Raw Output");
     textureFinalSyphonServer.setName("EasyGreenScreen - Final Output");
 
-    
-    
 
     
 }
 
+void ofApp::resetParams(bool & b){
+    chromakey->clippingMaskBR.set(ofVec2f(0,0));
+    chromakey->clippingMaskTL.set(ofVec2f(camW,camH));
+    chromakey->photoRotation.set(0.0f);
+    chromakey->photoZoom.set(1.0f);
+    chromakey->photoOffset.set(ofVec2f(0,0));
+    
+}
 //--------------------------------------------------------------
 void ofApp::exit() {
     delete chromakey;
@@ -68,9 +82,9 @@ void ofApp::update(){
         if(bUpdateBgColor)
             chromakey->updateBgColor(camera.getLivePixels());
         if(!isImage){
-            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgMovie.getTexture());
+            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgMovie.getTexture(), camW, camH);
         }else{
-            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgImage.getTexture());
+            chromakey->updateChromakeyMask(camera.getLiveTexture(), bgImage.getTexture(), camW, camH);
         }
     }
 #endif
@@ -80,9 +94,9 @@ void ofApp::update(){
         if(bUpdateBgColor)
             chromakey->updateBgColor(camera.getPixels());
         if(!isImage){
-            chromakey->updateChromakeyMask(camera.getTexture(), bgMovie.getTexture());
+            chromakey->updateChromakeyMask(camera.getTexture(), bgMovie.getTexture(), camW, camH);
         }else{
-            chromakey->updateChromakeyMask(camera.getTexture(), bgImage.getTexture());
+            chromakey->updateChromakeyMask(camera.getTexture(), bgImage.getTexture(), camW, camH);
         }
     }
 #endif
@@ -109,7 +123,7 @@ void ofApp::draw(){
     ofSetColor(255);
     ofBackground(0);
     // draw Cam mask
-    chromakey->drawFinalImage(0, 0,ofGetWindowWidth(), camH*(float)ofGetWindowWidth()/camW );
+    chromakey->drawFinalImage(0, 0,camW, camH);
     
     // GUI
     if(bShowGui) {
@@ -131,11 +145,9 @@ void ofApp::draw(){
 #ifdef CANONEDSDK
     textureRawSyphonServer.publishTexture(&camera.getColorTexture());
 #endif
-    
 #ifdef WEBCAM
     textureRawSyphonServer.publishTexture(&camera.getTexture());
 #endif
-    
 #ifdef BLACKMAGIC
     textureRawSyphonServer.publishTexture(&camera.getColorTexture());
 #endif
@@ -144,33 +156,6 @@ void ofApp::draw(){
     
 }
 
-//--------------------------------------------------------------
-void ofApp::drawCheckerboard(float x, float y, int width, int height, int size) {
-    if (!checkerboardTex.isAllocated()) {
-        checkerboardTex.allocate(width, height);
-        
-        ofPushStyle();
-        checkerboardTex.begin();
-        ofClear(255, 255, 255, 255);
-        int numWidth = width/size;
-        int numHeight = height/size;
-        for(int h=0; h<numHeight; h++) {
-            for(int w=0; w<numWidth; w++) {
-                if ((h+w)%2 == 0) {
-                    ofSetColor(ofColor::black);
-                    ofDrawRectangle(w*size, h*size, size, size);
-                }
-            }
-        }
-        checkerboardTex.end();
-        ofPopStyle();
-    }
-    
-    ofSetColor(255, 255);
-    checkerboardTex.draw(x, y);
-}
-
-//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
 }
