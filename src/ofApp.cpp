@@ -44,6 +44,7 @@ void ofApp::setup(){
     chromaGui.setDefaultHeight(15);
     chromaGui.setDefaultWidth(camW/5);
     chromaGui.setPosition(0, 0);
+    chromaGui.setName("press G toggle MENU");
     
     chromaGui.loadFromFile("settings.xml");
     chromaGui.minimizeAll();
